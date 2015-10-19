@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="atms">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Backbase ATMs</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="js/index.js"></script>
+</head>
+<body class="container-fluid" ng-controller="mainController">
+    <h1>ATMs</h1>
+    <form ng-submit="findAtms()">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: capitalize">Filter: {{currentFilter}} <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="" ng-click="updateFilter('city')">City</a></li>
+                        <li><a href="" ng-click="updateFilter('type')">Type</a></li>
+                    </ul>
+                </div>
+                <input type="text" class="form-control" ng-model="filterValue" required />
+                <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="Find ATMs"/>
+                </span>
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>House Number</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Postal Code</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="atm in atms">
+                <td>{{atm.type}}</td>
+                <td>{{atm.address.housenumber}}</td>
+                <td>{{atm.address.street}}</td>
+                <td>{{atm.address.city}}</td>
+                <td>{{atm.address.postalcode}}</td>
+                <td>{{atm.address.geoLocation.lat}}</td>
+                <td>{{atm.address.geoLocation.lng}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="loading-modal"><!-- Place at bottom of page --></div>
+</body>
+</html>
